@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>swipe demo</title>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css">
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+  <style>
+  html, body { padding: 0; margin: 0; }
+  html, .ui-mobile, .ui-mobile body {
+    height: 105px;
+  }
+  .ui-mobile, .ui-mobile .ui-page {
+    min-height: 105px;
+  }
+  #nav {
+    font-size: 200%;
+    width:17.1875em;
+    margin:17px auto 0 auto;
+  }
+  #nav a {
+    color: #777;
+    border: 2px solid #777;
+    background-color: #ccc;
+    padding: 0.2em 0.6em;
+    text-decoration: none;
+    float: left;
+    margin-right: 0.3em;
+  }
+  #nav a:hover {
+    color: #999;
+    border-color: #999;
+    background: #eee;
+  }
+  #nav a.selected,
+  #nav a.selected:hover {
+    color: #0a0;
+    border-color: #0a0;
+    background: #afa;
+  }
+  div.box {
+    width: 90%;
+    min-height: 200px;
+    text-align: center;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: #DAA1B9;
+  }
+
+
+  div.poem {
+   width: 100%;
+	min-height: 200px;
+   vertical-align: middle;
+   text-align: center;
+	white-space:pre-line;
+	display: none;  
+  }
+
+
+  
+  div.poem.swipe {
+	/*display: block; */
+	display: none;
+	background-color: #7B274A;
+	font-family: sans-serif;
+	font-size: 20pt;
+	color: #FFFFFF;
+	font-weight: bold;  
+  }
+  
+  div.box.swipe {    
+    background-color: cyan;
+  }
+  
+  div.poem.title {
+	font-size: 28pt;
+  }
+  
+  div.poem.author {
+	font-size: 24pt;
+	white-space: normal;
+  }
+  
+  div.poem.preface {
+	font-style: italic;  
+  }
+  </style>
+  <script type="text/javascript" >
+		$(document).ready(function()
+		{
+		  $.ajax({
+		    type: "GET",
+		    url: "Convector_Howlers.xml",
+		    dataType: "xml",
+		    success: parseXml
+		  });
+		  $( "div.box" ).on( "swipeleft", swipeleftHandler );
+		  $( "div.box" ).on( "swiperight", swiperightHandler );
+		  		  
+		});
+		
+		var counter = 0;		
+		function swiperightHandler( event ){
+		    $( $( "div.poem" )[ Math.abs(counter) % $( "div.poem" ).length ] ).hide().removeClass( "swipe" );
+		    counter++;
+		    $( $( "div.poem" )[ Math.abs(counter) % $( "div.poem" ).length ] ).toggle( "slow" ).addClass( "swipe" );
+		}		
+		
+		function swipeleftHandler( event ){
+		    $( $( "div.poem" )[ Math.abs(counter) % $( "div.poem" ).length ] ).hide().removeClass( "swipe" );
+		    counter--;
+		    $( $( "div.poem" )[ Math.abs(counter) % $( "div.poem" ).length ] ).toggle( "slow" ).addClass( "swipe" );
+		}		
+		
+		function parseXml(xml) {
+			//alert(xml);
+			
+			// find the title and put the text in a div tag
+			$(xml).find('title').each(function(){
+				//alert($(this).text());
+				$('#box').append("<div class='poem title ui-corner-all'>" + $(this).text() + "</div>");
+					
+			});
+			
+			// find the author and copyright and put them in a single div tag
+			$(xml).find('author').each(function(){
+				//alert($(this).text());
+				$('#box').append("<div class='poem author ui-corner-all'><br />" + "&copy;" + $(xml).find('copyright').text() + " By " + $(this).text() + "</div>");
+					
+			});
+			
+			// find a preface and put it in a div tag
+			$(xml).find('preface').each(function(){
+				//alert('found stanza');
+				$('#box').append("<div class='poem preface ui-corner-all'><emphasis>" + $(this).text().replace("\n", "<br />") + "</emphasis></div>");
+			});
+			
+			// find every beat and put it in a div tag
+			$(xml).find('beat').each(function(){
+				//alert('found stanza');
+				$('#box').append("<div class='poem ui-corner-all'>" + $(this).text().replace("\n", "<br />") + "</div>");
+			});
+			
+			$( "div.poem:first-child" ).addClass( "swipe" ).show( "slow" );
+		}
+  </script>
+</head>
+<body>
+ 
+<h3>Swipe to the left to go forward in the poem.<br />Swipe to the right to go backwards:</h3>
+<div id="box" class="box ui-corner-all"></div>
+ 
+</body>
+</html>

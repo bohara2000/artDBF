@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>swipe demo</title>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css">
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+  <script type="text/javascript" src="js/nexusUI.js"></script>
+  <script type="text/javascript" src="js/convector.js"></script>
+  <script>
+		$(function() {
+		    $( "[data-role='navbar']" ).navbar();
+		    $( "[data-role='header'], [data-role='footer']" ).toolbar();
+		});
+		// Update the contents of the toolbars
+		$( document ).on( "pagecontainershow", function() {
+		    // Each of the four pages in this demo has a data-title attribute
+		    // which value is equal to the text of the nav button
+		    // For example, on first page: <div data-role="page" data-title="Info">
+		    var current = $( ".ui-page-active" ).jqmData( "title" );
+		    // Change the heading
+		    $( "[data-role='header'] h1" ).text( current );
+		    // Remove active class from nav buttons
+		    $( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
+		    // Add active class to current nav button
+		    $( "[data-role='navbar'] a" ).each(function() {
+		        if ( $( this ).text() === current ) {
+		            $( this ).addClass( "ui-btn-active" );
+		        }
+		    });
+		});
+
+		nx.onload = function() {
+			nx.colorize("#7B274A");
+			nx.sendsTo("ajax");
+			nx.usesScript("nexusOSCRelay.php");
+			//add an OSC debugger for this example page
+			nx.printOSC();
+		}			
+	</script>
+	<style>
+  html, body { padding: 0; margin: 0; }
+  html, .ui-mobile, .ui-mobile body {
+    height: 105px;
+  }
+  .ui-mobile, .ui-mobile .ui-page {
+    min-height: 105px;
+  }
+  #nav {
+    font-size: 200%;
+    width:17.1875em;
+    margin:17px auto 0 auto;
+  }
+  #nav a {
+    color: #777;
+    border: 2px solid #777;
+    background-color: #ccc;
+    padding: 0.2em 0.6em;
+    text-decoration: none;
+    float: left;
+    margin-right: 0.3em;
+  }
+  #nav a:hover {
+    color: #999;
+    border-color: #999;
+    background: #eee;
+  }
+  #nav a.selected,
+  #nav a.selected:hover {
+    color: #0a0;
+    border-color: #0a0;
+    background: #afa;
+  }
+
+/* BEGIN poem styles */
+
+  div.box {
+    width: 90%;
+    min-height: 200px;
+    text-align: center;
+    padding: 10px;
+    vertical-align: middle;
+    background-color: #DAA1B9;
+  }
+
+
+  div.poem {
+   width: 100%;
+	min-height: 200px;
+   vertical-align: middle;
+   text-align: center;
+	white-space:pre-line;
+	display: none;  
+  }
+
+
+  
+  div.poem.swipe {
+	/*display: block; */
+	/* display: none; */
+	background-color: #7B274A;
+	font-family: sans-serif;
+	font-size: 20pt;
+	color: #FFFFFF;
+	font-weight: bold;  
+  }
+  
+  div.box.swipe {    
+    background-color: cyan;
+  }
+  
+  div.poem.title {
+	font-size: 28pt;
+  }
+  
+  div.poem.author {
+	font-size: 24pt;
+	white-space: normal;
+  }
+  
+  div.poem.preface {
+	font-style: italic;  
+  }
+  
+/* END poem styles */
+
+/* BEGIN control styles */
+
+  div.dialContainer {
+	padding: 5px;
+	vertical-align: middle;  
+  } 
+  
+  div.dialLabel {
+  	font-size: 1.17em;
+  	font-weight: bold;
+  	text-align: center;
+  }
+  
+/* END poem styles */
+  </style>
+</head>
+
+<body>
+
+	<div data-role="header">
+		<a href="index.html" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<h1>Convector Howlers</h1>
+	</div><!-- /header -->
+
+	
+	<div data-role="page">
+	
+		<div role="main" class="ui-content">
+	
+			<div>
+				<h3>Swipe to the left to go forward in the poem.<br />Swipe to the right to go backwards:</h3>
+				<div id="box" class="box ui-corner-all"></div>		
+				<h3>Tilt your phone...See what happens...</h3>
+				<div style="float: left;">		
+					<div class="dialContainer">
+						<canvas id="shakerstilt" nx="tilt" style="min-height:465px;width:340px"></canvas>				
+					</div>		
+				</div>
+				<div style="float: left;">
+					<div class="dialContainer">
+						<div class="dialLabel">Effect 1</div>
+						<canvas id="shakerchange1" nx="toggle" style="top:130px;height:65px;width:65px;padding: 10px;"></canvas>
+					</div>
+					<div class="dialContainer">
+						<div class="dialLabel">Effect 2</div>
+						<canvas id="shakerchange2" nx="toggle" style="top:270px;height:65px;width:65px;padding: 10px;"></canvas>
+					</div>
+					<div class="dialContainer">
+						<div class="dialLabel">Effect 3</div>
+						<canvas id="shakerchange3" nx="toggle" style="top:380px;height:65px;width:65px;padding: 10px;"></canvas>
+					</div>
+					<div class="dialContainer">
+						<div class="dialLabel">Effect 4</div>
+						<canvas id="shakerchange4" nx="toggle" style="top:500px;height:65px;width:65px;padding: 10px;"></canvas>
+					</div>
+				</div>
+				<div style="float: left;">
+					<div class="dialContainer">
+						<div class="dialLabel">Number of Objects</div>
+						<canvas id="shakerobjects" nx="slider" style="height:440px;width:45px"></canvas>				
+					</div>
+	
+				</div>
+			</div>
+		</div><!-- /content -->
+	
+	</div><!-- /page -->
+	
+	<div data-role="footer" data-position="fixed" data-theme="a">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="poem1-audience-ui1.html" data-transition="fade">Instrument 1</a></li>
+				<li><a href="poem1-audience-ui2.html" data-transition="flip">Instrument 2</a></li>
+				<li><a href="poem1-audience-ui3.html" data-transition="turn">Instrument 3</a></li>				
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->
+</body>
+</html>

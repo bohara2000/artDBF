@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>keypress demo</title>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+	<script type="text/javascript" src="js/nexusUI.js"></script>
+	<script type="text/javascript">
+	nx.onload = function() {
+
+				//send to ajax and devine php relay script path
+				nx.sendsTo("ajax");
+				nx.setAjaxPath("nexusOSCrelay.php");
+				
+				// sets a mode for each button. default is toggle.
+				perc1.mode = "impulse";
+				perc2.mode = "impulse";
+				perc3.mode = "impulse";
+				perc4.mode = "impulse";
+
+				//add an OSC debugger for this example page
+				//nx.printOSC()
+	}
+	
+	$(document).ready(function() {
+
+	    $('#target').keydown(
+		function(e) {
+		   //alert(e.which);
+		   $.post( "nexusOSCRelay.php", { oscName: "/target", data: e.which } );	
+		}
+	    );
+
+	});
+	</script>
+</head>
+<body>
+<div data-role="page" >
+	<header data-role="header">
+	</header>
+
+	<div data-role="content">
+	<form>				
+		<div data-role="collapsible-set" data-theme="c">
+		<div id="subtitles">Test Text</div>
+			<div data-role="collapsible" data-collapsed="false">
+			<h3>Musical Typist</h3>
+			<fieldset>    
+			    <label for="target">Type the text you see above (or what you think about it):</label>
+			    <textarea name="target" id="target">
+			    </textarea> 
+			</fieldset>
+			</div>
+
+			<div data-role="collapsible">
+				<h3>Tilt-A-Whirl</h3>
+				<div class="dialLabel">Tilt your phone...See what happens...</div>
+				<div>
+					<div style="float: left;">				
+						<canvas id="shakerstilt" nx="tilt" style="height:445px;width:340px"></canvas>
+					</div>
+					<div style="float: left;">
+						<div>
+							<div class="dialLabel">Effect 1</div>
+							<canvas id="shakerchange1" nx="toggle" style="top:130px;height:65px;width:65px;padding: 10px;"></canvas>
+						</div>
+						<div>
+							<div class="dialLabel">Effect 2</div>
+							<canvas id="shakerchange2" nx="toggle" style="top:270px;height:65px;width:65px;padding: 10px;"></canvas>
+						</div>
+						<div>
+							<div class="dialLabel">Effect 3</div>
+							<canvas id="shakerchange3" nx="toggle" style="top:380px;height:65px;width:65px;padding: 10px;"></canvas>
+						</div>
+						<div>
+							<div class="dialLabel">Effect 4</div>
+							<canvas id="shakerchange4" nx="toggle" style="top:500px;height:65px;width:65px;padding: 10px;"></canvas>
+						</div>
+					</div>
+					<div style="float: left;">
+						<div class="dialLabel">Number of Objects</div>
+						<canvas id="shakerobjects" nx="slider" style="height:440px;width:45px"></canvas>
+					</div>					
+				</div>
+				
+			</div>
+			<div data-role="collapsible">
+				<h3>Finger Drums</h3>
+				<canvas id="perc1" nx="button" style="height:100px;width:100px">Button</canvas>
+				<canvas id="perc2" nx="button" style="height:100px;width:100px">Button</canvas>
+				<canvas id="perc3" nx="button" style="height:100px;width:100px">Button</canvas>
+				<canvas id="perc4" nx="button" style="height:100px;width:100px">Button</canvas>
+			</div>
+		</div>		
+	</form>
+	</div>
+
+	<footer data-role="footer">
+	</footer>
+
+</div>
+
+</body>
+</html>

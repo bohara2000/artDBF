@@ -1,0 +1,43 @@
+<!doctype html>
+<html>   
+	<head>   
+		<title>Poet UI</title>
+		<link type="style/css" href="styles/nexusUI.css" rel="stylesheet">
+		<!-- standard includes of all of the nexusUI javascripts-->
+		<script type="text/javascript" src="lib/jquery.js"></script>
+		<script type="text/javascript" src="lib/nexusUI.js"></script>
+		
+		<!-- Make mobile display non scalable and fitting the viewport window -->
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<script>
+		nx.onload = function() {
+
+			nx.colorize("#0af");
+			nx.sendsTo("ajax");
+			nx.setAjaxPath("lib/nexusOSCRelay.php");
+			nx.printOSC();
+
+		}
+		</script>
+	</head>
+	<body>
+		<div>
+			<div>Pitch Shift</div>
+			<div>				
+				<canvas id="pitchShiftStart" nx="toggle" style="vertical-align:top;height:45px;width:45px"></canvas>	
+				<canvas id="pitchShiftDial" nx="dial" style="height:125px;width:120px"></canvas>				
+			</div>
+			<div>Pitch Follower</div>
+			<div>
+				<canvas id="pitchFollowerStart" nx="toggle" style="vertical-align:top;height:45px;width:45px"></canvas>
+				<canvas id="pitchFollowerDial" nx="dial" style="height:135px;width:120px"></canvas>				
+			</div>
+			<div>Unknown Effect</div>
+			<div>
+				
+				<canvas id="button3" nx="toggle" style="vertical-align:top;height:45px;width:45px"></canvas>
+				<canvas id="dial3" nx="dial" style="height:120px;width:125px"></canvas>
+			</div>			
+		<div>
+	</body>
+</html>

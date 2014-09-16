@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>swipe demo</title>
+  <link rel="stylesheet" href="styles/jquery.mobile-1.4.3.min.css">
+  <link rel="stylesheet" href="styles/audience.css">
+  <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery.mobile-1.4.3.min.js"></script>
+  <script type="text/javascript" src="js/create_elements.js"></script>
+  <script type="text/javascript" src="js/convector.js"></script>  
+  <script type="text/javascript" src="js/nexusUI.js"></script>
+  <script>
+    nx.onload = function() {		
+		nx.colorize("#7B274A");
+		nx.sendsTo("ajax");
+		nx.usesScript("lib/nexusOSCRelay.php");
+		mouseReader.animate("bounce");
+		nx.startPulse();
+		//add an OSC debugger for this example page
+		//nx.printOSC();
+	} 
+   </script>
+</head>
+
+<body>
+
+	<div data-role="header">
+		<a href="index.html" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<h1>Technology and Poetry</h1>
+		<div class="ui-bar ui-bar-b">
+				<form action="#" method="get">
+					<div class="center">
+						<label for="poemSelect">Select a Poem:</label>
+				      <select name="poemSelect" id="poemSelect">
+							<option value="Convector_Howlers.xml">Convector Howlers</option>	
+							<option value="Children_of_the_Woods.xml">Children of the Woods</option>
+							<option value="Sym-Bionic.xml">Sym-Bionic</option>
+							<option value="The_Dreams_of_Mr_Peachtree_Street.xml">The Dreams of Mr. Peachtree Street</option>
+							<option value="Bargains_with_Aurora_and_the_Borealis.xml">Bargains, with Aurora and the Borealis</option>							
+				      </select>
+					</div>					
+				</form>
+			</div>		
+			</div>		
+	</div><!-- /header -->
+
+	
+	<div data-role="page">
+	
+		<div role="main" class="ui-content">
+	
+			<div>
+				<h3>Swipe to the left to go forward in the poem.<br />Swipe to the right to go backwards:</h3>
+				<div id="box" class="box ui-corner-all"></div>		
+				<h3 id="audienceUI1Instructions">Tilt your phone...See what happens...</h3>
+				<div style="float: left;">				
+					<div>
+						<div class="dialContainer" style="float: left;">
+							<div class="dialLabel">Start/Stop</div>
+							<canvas id="shakerstiltStart" nx="toggle" style="top:130px;height:65px;width:65px;padding: 10px;"></canvas>
+						</div>	
+						<div class="dialContainer" style="float: left;" id="work_area">			
+						</div>	
+					</div>
+					<div>
+						<div class="dialContainer" style="float: left;">
+							<div class="dialLabel">Effect 1</div>
+							<canvas id="shakerchange1" nx="toggle" style="height:65px;width:65px;padding: 10px;"></canvas>
+						</div>
+						<div class="dialContainer" style="float: left;">
+							<div class="dialLabel">Effect 2</div>
+							<canvas id="shakerchange2" nx="toggle" style="height:65px;width:65px;padding: 10px;"></canvas>
+							</div>
+					</div>
+					<div>
+
+						<div class="dialContainer" style="float: left;">
+							<div class="dialLabel">Effect 3</div>
+							<canvas id="shakerchange3" nx="toggle" style="height:65px;width:65px;padding: 10px;"></canvas>
+						</div>
+						<div class="dialContainer" style="float: left;">
+							<div class="dialLabel">Effect 4</div>
+							<canvas id="shakerchange4" nx="toggle" style="height:65px;width:65px;padding: 10px;"></canvas>
+						</div>
+					</div>
+				</div>
+				<!-- 
+				<div style="min-width: 30%; float: left;">
+					<div class="dialContainer">
+						<div class="dialLabel">Number of<br />Objects</div>
+						<canvas id="shakerobjects" nx="slider" style="height: 300px; width:45px"></canvas>				
+					</div>
+	
+				</div>
+				-->
+			</div>
+		</div><!-- /content -->
+	
+	</div><!-- /page -->
+	
+	<div data-role="footer" data-position="fixed" data-id="instruments" data-theme="a" data-transition="none">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="poem1-audience-ui1.html" data-ajax="false"  >Instrument 1</a></li>
+				<li><a href="poem1-audience-ui2.html" data-ajax="false" >Instrument 2</a></li>
+				<li><a href="poem1-audience-ui3.html" data-ajax="false" >Instrument 3</a></li>				
+			</ul>
+		</div>
+		<!-- /navbar -->
+	</div><!-- /footer -->
+</body>
+</html>

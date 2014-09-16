@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>:: Nexus Quick Demo ::</title>
+
+		<link type="style/css" href="styles/nexusUI.css" rel="stylesheet">
+		<!-- standard includes of all of the nexusUI javascripts-->
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/nexusUI.js"></script>
+		
+		<!-- Make mobile display non scalable and fitting the viewport window -->
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+
+	<script>
+		
+		// Setup all of the UI objects you want to use.
+		// This occurs after the page has loaded all of the canvas objects to draw into.
+		
+		nx.onload = function() {
+			nx.setTransmissionProtocol("ajax");
+			nx.setTransmitCommand("nexusOSCRelay.php");
+			
+			button1.mode = "impulse";
+			//add an OSC debugger for this example page
+			nx.printOSC()
+
+		}
+		
+	</script>
+</head>
+<body>
+	<!-- Layout all of the UI Elements as Canvas Objects. -->
+	<div>
+		<canvas nx="dial"></canvas>
+		<canvas nx="dial"></canvas>
+	</div>  
+	<div>
+		<canvas nx="button">Button</canvas>
+		<canvas nx="button">Button</canvas>
+		<canvas nx="button">Button</canvas>
+	 </div>
+</body>	
+</html>

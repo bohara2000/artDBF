@@ -1,0 +1,31 @@
+<!doctype html>
+<html>   
+	<head>   
+		<title>NexusUP</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="initial-scale=0.5, user-scalable=no"/>
+		<link type="style/css" href="styles/nexusUI.css" rel="stylesheet">
+		<!-- standard includes of all of the nexusUI javascripts-->
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/nexusUI.js"></script>
+	</head>
+	<body>
+		<script>
+		nx.onload = function() {
+			nx.colorize("#0af");
+			nx.sendsTo("ajax");
+			nx.usesScript("nexusOSCRelay.php");
+			//add an OSC debugger for this example page
+			nx.printOSC();
+		}
+		</script>
+		<div>
+			<div>
+				<canvas id="comments" nx="comment" style="height: 40px; width: 94%;"></canvas>
+			</div>
+			<div>
+				<canvas id="button3" nx="button" style="height:45px;width:45px"></canvas>
+			</div>
+		</div>
+	</body>
+</html>
